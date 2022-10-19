@@ -5,7 +5,7 @@ You can enter any wallet address to check the following information:
   - Total portfolio value
   - Token transfer history
   - NFTs of the wallet adddress
-    - You can filter NFTs by name
+    - You can filter NFTs by name.
 
 *Install dependencies of the "backend" folder first.
 *Supports Ethereum and Polygon.
