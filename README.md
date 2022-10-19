@@ -6,4 +6,5 @@ You can enter any wallet address to check the following information:
   - Token transfer history
   - NFTs of the wallet adddress
     - You can filter NFTs by name
-Supports Ethereum and Polygon.
+
+*Supports Ethereum and Polygon.
