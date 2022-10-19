@@ -7,6 +7,6 @@ You can enter any wallet address to check the following information:
   - NFTs of the wallet adddress
     - You can filter NFTs by name.
 
-*Install dependencies of the "backend" folder first.
+*Install dependencies of the "frontend" and "backend" folders by using "npm install".
 
 *Supports Ethereum and Polygon.
