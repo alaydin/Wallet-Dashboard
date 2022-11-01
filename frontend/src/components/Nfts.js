@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Input, Table } from '@web3uikit/core';
 
+const port = "https://walletdashboard.herokuapp.com" || 3000;
+
 function Nfts({ wallet, chain, nfts, setNfts, filteredNfts, setFilteredNfts }) {
 
+    const [isFetched, setIsFetched] = useState(false);
     const [nameFilter, setNameFilter] = useState("");
 
     async function getNftBalance() {
-        const response = await axios.get("http://localhost:8080/nftBalance", {
+        const response = await axios.get(`${port}/nftBalance`, {
             params: {
                 address: wallet,
                 chain: chain
@@ -16,6 +19,7 @@ function Nfts({ wallet, chain, nfts, setNfts, filteredNfts, setFilteredNfts }) {
         if (response.data) {
             nftProcessing(response.data.result);
         }
+        setIsFetched(true);
     }
     function nftProcessing(temp) {
         for (let i = 0; i < temp.length; i++) {
@@ -63,7 +67,7 @@ function Nfts({ wallet, chain, nfts, setNfts, filteredNfts, setFilteredNfts }) {
                 />
             </div>
             <div className='nftList'>
-                {filteredNfts.length > 0 &&
+                {isFetched ?
                     filteredNfts.map((e) => {
                         return (
                             <>
@@ -75,6 +79,8 @@ function Nfts({ wallet, chain, nfts, setNfts, filteredNfts, setFilteredNfts }) {
                             </>
                         )
                     })
+                    :
+                    <h2>No NFTs yet</h2>
                 }
             </div>
         </>

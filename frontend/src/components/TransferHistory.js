@@ -1,11 +1,16 @@
 import React from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { Table, Button } from '@web3uikit/core';
 
+const port = "https://walletdashboard.herokuapp.com" || 3000;
+
 function TransferHistory({ wallet, chain, transfers, setTransfers }) {
 
+    const [isFetched, setIsFetched] = useState(false);
+
     async function getTokenTransfers() {
-        const response = await axios.get("http://localhost:8080/tokenTransfers", {
+        const response = await axios.get(`${port}/tokenTransfers`, {
             params: {
                 address: wallet,
                 chain: chain
@@ -19,6 +24,7 @@ function TransferHistory({ wallet, chain, transfers, setTransfers }) {
         } else {
             console.log("No transfer data found.");
         }
+        setIsFetched(true);
     }
     return (
         <>
@@ -26,7 +32,7 @@ function TransferHistory({ wallet, chain, transfers, setTransfers }) {
                 <Button text="Get Token Transfer History" onClick={getTokenTransfers}></Button>
             </div>
             <div>
-                {transfers.length > 0 &&
+                {isFetched &&
                     <Table
                         pageSize={8}
                         noPagination={false}

@@ -1,11 +1,16 @@
 import React from 'react'
+import { useState } from 'react';
 import axios from 'axios';
 import { Table, Button } from '@web3uikit/core';
 
+const port = "https://walletdashboard.herokuapp.com" || 3000;
+
 function Tokens({ wallet, chain, tokens, setTokens }) {
 
+    const [isFetched, setIsFetched] = useState(false);
+
     async function gettokenBalances() {
-        const response = await axios.get("http://localhost:8080/tokenBalances", {
+        const response = await axios.get(`${port}/tokenBalances`, {
             params: {
                 address: wallet,
                 chain: chain
@@ -21,12 +26,13 @@ function Tokens({ wallet, chain, tokens, setTokens }) {
             }
             setTokens(t);
         }
+        setIsFetched(true);
     }
 
     return (
         <>
             <div className='tabHeading'><Button text='Check ERC20 Tokens' onClick={gettokenBalances}></Button></div>
-            {tokens.length > 0 &&
+            {isFetched &&
                 <Table
                     pageSize={5}
                     noPagination={true}

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import "../App.css";
 
 function PortfolioValue({ nativeValue, tokens }) {
+    
     const [totalValue, setTotalValue] = useState(0);
 
     useEffect(() => {

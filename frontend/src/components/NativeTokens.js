@@ -3,12 +3,14 @@ import axios from "axios";
 import { Table, Button } from '@web3uikit/core';
 import { Reload } from "@web3uikit/icons";
 
+const port = "https://walletdashboard.herokuapp.com" || 3000;
+
 function NativeTokens({ wallet, chain, nativeBalance, setNativeBalance, nativeValue, setNativeValue }) {
 
     const [isFetched, setIsFetched] = useState(false);
 
     async function getNativeBalance() {
-        const response = await axios.get("http://localhost:8080/nativeBalance", {
+        const response = await axios.get(`${port}/nativeBalance`, {
             params: {
                 address: wallet,
                 chain: chain
@@ -19,12 +21,13 @@ function NativeTokens({ wallet, chain, nativeBalance, setNativeBalance, nativeVa
             setNativeBalance(Number(response.data.balance) / 1e18.toFixed(3));
             setNativeValue((Number(response.data.balance) / 1e18 * Number(response.data.usd)).toFixed(2));
         }
+        setIsFetched(true);
     }
 
     return (
         <>
             <div className='tabHeading'><Button text='Check Native Currency Balance' onClick={getNativeBalance}></Button></div>
-            {(nativeBalance > 0 && nativeValue > 0) &&
+            {isFetched &&
                 <Table
                     pageSize={1}
                     noPagination={true}

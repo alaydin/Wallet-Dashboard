@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../App.css';
 import { Input, Select, CryptoLogos } from "@web3uikit/core";
 
