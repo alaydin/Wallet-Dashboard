@@ -1,3 +1,5 @@
+You can use the app on https://walletdashboard.vercel.app/
+
 This is a project based on one of Moralis Web3 tutorials (https://www.youtube.com/c/MoralisWeb3).
 You can enter any wallet address to check the following information:
   - Native currency balance and its USD value
