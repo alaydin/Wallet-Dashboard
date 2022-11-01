@@ -32,7 +32,7 @@ function TransferHistory({ wallet, chain, transfers, setTransfers }) {
                 <Button text="Get Token Transfer History" onClick={getTokenTransfers}></Button>
             </div>
             <div>
-                {(isFetched && transfers) &&
+                {transfers.length > 0 &&
                     <Table
                         pageSize={8}
                         noPagination={false}
